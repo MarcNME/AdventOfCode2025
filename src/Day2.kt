@@ -1,5 +1,6 @@
 fun main() {
     val fileNames = listOf("day2_example.txt", "day2.txt")
+    println("Day 2\n")
     for (fileName in fileNames) {
         val input = readInputAsString(fileName)
         println("Running part 1 for $fileName:")
@@ -11,7 +12,7 @@ fun main() {
     }
 }
 
-fun part1(input: String) {
+private fun part1(input: String) {
     var sum = 0L
     val ranges = input.split(",")
     ranges.forEach { range ->
@@ -24,7 +25,7 @@ fun part1(input: String) {
     println(sum)
 }
 
-fun part2(input: String) {
+private fun part2(input: String) {
     var sum = 0L
     val ranges = input.split(",")
     ranges.forEach { range ->
