@@ -1,10 +1,12 @@
 fun main() {
     val testInput = readInputAsLines("day1.txt")
+    println("Day 1\n")
     part1(testInput)
     part2(testInput)
+    println()
 }
 
-fun part1(input: List<String>) {
+private fun part1(input: List<String>) {
     var dialPosition = 50
     var zeroCounter = 0
 
@@ -25,7 +27,7 @@ fun part1(input: List<String>) {
     println("The dial hit position 0 a total of $zeroCounter times")
 }
 
-fun part2(input: List<String>) {
+private fun part2(input: List<String>) {
     var dialPosition = 50
     var zeroCounter = 0
 
