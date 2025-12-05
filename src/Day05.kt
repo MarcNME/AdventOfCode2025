@@ -1,6 +1,4 @@
 import java.util.Locale
-import kotlin.math.max
-import kotlin.math.min
 
 fun main() {
     println("Day 4")

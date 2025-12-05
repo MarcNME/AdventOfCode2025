@@ -1,5 +1,5 @@
 fun main() {
-    val fileNames = listOf("day2_example.txt", "day2.txt")
+    val fileNames = listOf("day02_example.txt", "day02.txt")
     println("Day 2\n")
     for (fileName in fileNames) {
         val input = readInputAsString(fileName)
