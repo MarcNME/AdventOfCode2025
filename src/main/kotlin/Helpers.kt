@@ -12,16 +12,3 @@ fun String.isPalindrome(): Boolean {
 
     return firstHalf == secondHalf
 }
-
-fun callParts(
-    inputs: List<String>,
-    functions: List<(String) -> Unit>,
-) {
-    inputs.forEach { input ->
-        functions.forEach { function ->
-            println("Calling function: $function:")
-            function(input)
-            println()
-        }
-    }
-}

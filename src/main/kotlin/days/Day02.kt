@@ -1,26 +1,24 @@
 package days
 
+import Solution
 import isPalindrome
 import readInputAsString
 
 
 class Day02 : Day {
-    override fun runDay() {
+    override fun runDay(): List<Solution> {
         val fileNames = listOf("day02_example.txt", "day02.txt")
-        println("Day 2\n")
+        val solutions = mutableListOf<Solution>()
         for (fileName in fileNames) {
             val input = readInputAsString(fileName)
-            println("Running part 1 for $fileName:")
-            part1(input)
-            println()
-            println("Running part 2 for $fileName")
-            part2(input)
-            println()
+            solutions.add(Solution(this.javaClass.simpleName, fileName, part1(input), part2(input)))
         }
+
+        return solutions
     }
 
 
-    private fun part1(input: String) {
+    private fun part1(input: String): Long {
         var sum = 0L
         val ranges = input.split(",")
         ranges.forEach { range ->
@@ -30,10 +28,10 @@ class Day02 : Day {
             }
         }
 
-        println(sum)
+        return sum
     }
 
-    private fun part2(input: String) {
+    private fun part2(input: String): Long {
         var sum = 0L
         val ranges = input.split(",")
         ranges.forEach { range ->
@@ -43,7 +41,7 @@ class Day02 : Day {
             }
         }
 
-        println(sum)
+        return sum
     }
 
     private fun Long.hasRepeatedPart(): Boolean {

@@ -1,23 +1,21 @@
 package days
 
+import Solution
 import readInputAsLines
 
 class Day04 : Day {
-    override fun runDay() {
-        println("Day 4")
+    override fun runDay(): List<Solution> {
         val fileNames = listOf("day04_example.txt", "day04.txt")
+        val solutions = mutableListOf<Solution>()
         for (fileName in fileNames) {
             val grid = readInputAsLines(fileName).map { it.toCharArray() }
-            println("Running part 1 for $fileName:")
-            part1(grid)
-            println()
-            println("Running part 2 for $fileName")
-            part2(grid)
-            println()
+            solutions.add(Solution(this.javaClass.simpleName, fileName, part1(grid), part2(grid)))
         }
+
+        return solutions
     }
 
-    private fun part1(grid: List<CharArray>) {
+    private fun part1(grid: List<CharArray>): Int {
         var moveableRolls = 0
         for (i in grid.indices) {
             for (j in grid.first().indices) {
@@ -70,10 +68,10 @@ class Day04 : Day {
             }
         }
 
-        println("Movable rolls: $moveableRolls")
+        return moveableRolls
     }
 
-    private fun part2(grid: List<CharArray>) {
+    private fun part2(grid: List<CharArray>): Int {
         var moveableRollsTotal = 0
         var movableRollsRound: Int
         val gridMutable = grid.map { it.toMutableList() }.toMutableList()
@@ -142,6 +140,6 @@ class Day04 : Day {
             moveableRollsTotal += movableRollsRound
         } while (movableRollsRound > 0)
 
-        println("Movable rolls total: $moveableRollsTotal")
+        return moveableRollsTotal
     }
 }

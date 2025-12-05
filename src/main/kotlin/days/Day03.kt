@@ -1,33 +1,30 @@
 package days
 
+import Solution
 import readInputAsLines
 class Day03 : Day {
-    override fun runDay() {
-        println("Day 3")
+    override fun runDay(): List<Solution> {
+        val solutions = mutableListOf<Solution>()
         val fileNames = listOf("day03_example.txt", "day03.txt")
         for (fileName in fileNames) {
             val input = readInputAsLines(fileName)
-            println("Running part 1 for $fileName:")
-            part1(input)
-            println()
-            println("Running part 2 for $fileName")
-            part2(input)
-            println()
+            solutions.add(Solution(this.javaClass.simpleName, fileName, part1(input), part2(input)))
         }
+
+        return solutions
     }
 
-    private fun part1(lines: List<String>) {
+    private fun part1(lines: List<String>): Int {
         var joltageSum = 0
         lines.forEach { line ->
             val lpj = getLargestPossibleJoltage(line)
             joltageSum += lpj
         }
 
-        println()
-        println("Joltage sum: $joltageSum")
+        return joltageSum
     }
 
-    private fun part2(lines: List<String>) {
+    private fun part2(lines: List<String>): Long {
         var joltageSum = 0L
         lines.map { line -> line.map { c -> c.digitToInt() } }.forEach { line ->
             val lineLength = line.size
@@ -42,7 +39,7 @@ class Day03 : Day {
             joltageSum += joltage.toLong()
         }
 
-        println("Joltage sum: $joltageSum")
+        return joltageSum
     }
 
     private fun getLargestPossibleJoltage(str: String): Int {

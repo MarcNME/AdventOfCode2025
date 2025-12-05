@@ -1,37 +1,32 @@
 package days
 
+import Solution
 import readInputAsLines
 import java.util.*
 
 class Day05 : Day {
-    override fun runDay() {
-        println("Day 4")
+    override fun runDay(): List<Solution> {
         val fileNames = listOf("day05_example.txt", "day05.txt")
+        val solutions = mutableListOf<Solution>()
         for (fileName in fileNames) {
             val lines = readInputAsLines(fileName)
-            println("Running part 1 for $fileName:")
-            part1(lines)
-            println()
-            println("Running part 2 for $fileName")
-            part2(lines)
-            println()
+            solutions.add(Solution(this.javaClass.simpleName, fileName, part1(lines), part2(lines)))
         }
+
+        return solutions
     }
 
-    private fun part1(lines: List<String>) {
+    private fun part1(lines: List<String>) : Int{
         val freshIngredientsRanges = getFreshIngredientsRanges(lines)
         val freshIngredients = getFreshIngredients(lines, freshIngredientsRanges)
-        println(freshIngredients)
-        println(freshIngredients.size)
+        return freshIngredients.size
     }
 
-    private fun part2(lines: List<String>) {
+    private fun part2(lines: List<String>): Long {
         val freshIngredientsRanges = getFreshIngredientsRanges(lines)
-        println(String.format(Locale.GERMANY, "%,d", freshIngredientsRanges.sumOf { it.last - it.first + 1 }))
         val rangesWithoutOverlapping = mergeRanges(freshIngredientsRanges.toList())
-        println(rangesWithoutOverlapping)
         val size = rangesWithoutOverlapping.sumOf { it.last - it.first + 1 }
-        println(String.format(Locale.GERMANY, "%,d", size))
+        return size
     }
 
     private fun getFreshIngredientsRanges(lines: List<String>): Set<LongRange> {
