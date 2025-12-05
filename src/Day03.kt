@@ -1,6 +1,6 @@
 fun main() {
     println("Day 3")
-    val fileNames = listOf("day3_example.txt", "day3.txt")
+    val fileNames = listOf("day03_example.txt", "day03.txt")
     for (fileName in fileNames) {
         val input = readInputAsLines(fileName)
         println("Running part 1 for $fileName:")
