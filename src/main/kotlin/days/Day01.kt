@@ -1,17 +1,21 @@
 package days
 
+import Solution
 import readInputAsLines
 
 class Day01 : Day {
-    override fun runDay() {
-        val testInput = readInputAsLines("day01.txt")
-        println("Day 1\n")
-        part1(testInput)
-        part2(testInput)
-        println()
+    override fun runDay(): List<Solution> {
+        val fileNames = listOf("day01_example.txt", "day01.txt")
+        val solutions = mutableListOf<Solution>()
+        for (fileName in fileNames) {
+            val input = readInputAsLines(fileName)
+            solutions.add(Solution(this.javaClass.simpleName, fileName, part1(input), part2(input)))
+        }
+
+        return solutions
     }
 
-    private fun part1(input: List<String>) {
+    private fun part1(input: List<String>): Int {
         var dialPosition = 50
         var zeroCounter = 0
 
@@ -29,17 +33,16 @@ class Day01 : Day {
             }
         }
 
-        println("The dial hit position 0 a total of $zeroCounter times")
+        return zeroCounter
     }
 
-    private fun part2(input: List<String>) {
+    private fun part2(input: List<String>): Int {
         var dialPosition = 50
         var zeroCounter = 0
 
         input.forEach {
             val steps = it.substring(1).toInt()
 
-            print("Moving $it: from $dialPosition to ")
             for (i in 1..steps) {
                 if (it.startsWith("R")) {
                     if (dialPosition == 99) {
@@ -60,7 +63,7 @@ class Day01 : Day {
             }
         }
 
-        println("The dial hit position 0 a total of $zeroCounter times")
+        return zeroCounter
     }
 
     private fun moveLeft(
