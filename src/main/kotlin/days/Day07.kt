@@ -21,8 +21,9 @@ class Day07 : Day {
         for (i in 1 until tachyonManifold.size) {
             for (j in 0 until tachyonManifold[i].size) {
                 if (tachyonManifold[i - 1][j] == 'S' || tachyonManifold[i - 1][j] == '|') {
-                    if (tachyonManifold[i][j] == '.') tachyonManifold[i][j] = '|'
-                    else if (tachyonManifold[i][j] == '^') {
+                    if (tachyonManifold[i][j] == '.') {
+                        tachyonManifold[i][j] = '|'
+                    } else if (tachyonManifold[i][j] == '^') {
                         splitCounter++
                         tachyonManifold[i][j - 1] = '|'
                         tachyonManifold[i][j + 1] = '|'
@@ -41,9 +42,17 @@ class Day07 : Day {
             for (j in 0 until tachyonManifold[i].size) {
                 if (tachyonManifold[i][j] == "^") {
                     tachyonManifold[i][j - 1] =
-                        if (tachyonManifold[i][j - 1] == "0") tachyonManifold[i - 1][j] else (tachyonManifold[i - 1][j].toLong() + tachyonManifold[i][j - 1].toLong()).toString()
+                        if (tachyonManifold[i][j - 1] == "0") {
+                            tachyonManifold[i - 1][j]
+                        } else {
+                            (tachyonManifold[i - 1][j].toLong() + tachyonManifold[i][j - 1].toLong()).toString()
+                        }
                     tachyonManifold[i][j + 1] =
-                        if (tachyonManifold[i][j + 1] == "0") tachyonManifold[i - 1][j] else (tachyonManifold[i - 1][j].toLong() + tachyonManifold[i][j + 1].toLong()).toString()
+                        if (tachyonManifold[i][j + 1] == "0") {
+                            tachyonManifold[i - 1][j]
+                        } else {
+                            (tachyonManifold[i - 1][j].toLong() + tachyonManifold[i][j + 1].toLong()).toString()
+                        }
                 }
             }
             for (j in 0 until tachyonManifold[i].size) {
@@ -55,19 +64,5 @@ class Day07 : Day {
         }
 
         return tachyonManifold.last().sumOf { it.toLong() }
-    }
-
-    private fun nextStep(tachyonManifold: List<MutableList<Char>>, pos: Pair<Int, Int>): Long {
-        return if (pos.first == tachyonManifold.lastIndex) 1L
-        else {
-            var newPos = pos
-            while (tachyonManifold[newPos.first][newPos.second] == '.') {
-                if (newPos.first + 1 >= tachyonManifold.lastIndex) return 1L
-                newPos = newPos.first + 1 to newPos.second
-
-            }
-            return nextStep((tachyonManifold), newPos.first + 1 to newPos.second - 1) +
-                    nextStep((tachyonManifold), newPos.first + 1 to newPos.second + 1)
-        }
     }
 }
