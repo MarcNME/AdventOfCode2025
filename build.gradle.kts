@@ -11,9 +11,6 @@ repositories {
 
 dependencies {
     implementation("de.m3y.kformat:kformat:0.14")
-    testImplementation(platform("org.junit:junit-bom:6.0.1"))
-    testImplementation("org.junit.jupiter:junit-jupiter")
-    testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 }
 
 tasks.test {
