@@ -9,7 +9,7 @@ import kotlin.math.sqrt
 
 class Day08 : Day {
     override fun runDay(): List<Solution> {
-        val fileNames = listOf("day08.txt")
+        val fileNames = listOf("day08_example.txt",)
         val solutions = mutableListOf<Solution>()
         for (fileName in fileNames) {
             val input = readInputAsLines(fileName)
@@ -23,8 +23,9 @@ class Day08 : Day {
         val junctionBoxes = getJunctionBoxes(input)
         val connections = mutableListOf<Pair<JunctionBox, JunctionBox>>()
         val circuits = mutableListOf<MutableList<Pair<JunctionBox, JunctionBox>>>()
+        val unconnectedBoxes = junctionBoxes.toMutableList()
 
-        while (circuits.sumOf { it.size } < 1001) {
+        while (unconnectedBoxes.isNotEmpty()) {
             val connection = getShortestPossibleConnection(junctionBoxes, connections)
             connections.add(connection)
             val circuit = circuits.firstOrNull { circuit -> circuit.any { connection.first == it.first || connection.second == it.second } }
@@ -35,6 +36,9 @@ class Day08 : Day {
             } else {
                 circuits.add(mutableListOf(connection))
             }
+
+            unconnectedBoxes.remove(connection.first)
+            unconnectedBoxes.remove(connection.second)
         }
 
         circuits.forEach { circuit -> println(circuit) }
@@ -42,6 +46,7 @@ class Day08 : Day {
         val biggestCircuits = circuits.sortedByDescending { it.size }.take(3)
         biggestCircuits.forEach { circuit -> println(circuit) }
         val x = biggestCircuits.map { circuit -> circuit.flatMap { listOf(it.first, it.second) }.toSet() }
+        println(x.map { it.size })
         return multiply(x.map { it.size })
     }
 
